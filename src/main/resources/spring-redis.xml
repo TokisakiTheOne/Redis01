@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com"/>
+    <!--连接池配置-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!--最大连接数-->
+        <property name="maxTotal" value="30"/>
+        <!--最大空闲连接-->
+        <property name="maxIdle" value="10"/>
+        <!--每次释放的最大数目-->
+        <property name="numTestsPerEvictionRun" value="1024"/>
+        <!--释放连接的扫描间隔-->
+        <property name="timeBetweenEvictionRunsMillis" value="30000"/>
+        <!--连接的最小空闲时间-->
+        <property name="minEvictableIdleTimeMillis" value="1800000"/>
+        <!--连接空闲多长时间后释放-->
+        <property name="softMinEvictableIdleTimeMillis" value="10000"/>
+        <!--获取连接的最大等待时间-->
+        <property name="maxWaitMillis" value="2000"/>
+        <!--获取连接时  检查有效性-->
+        <property name="testOnBorrow" value="true"/>
+        <!--在空闲时    检查有效性-->
+        <property name="testWhileIdle" value="true"/>
+        <!--连接耗尽时 是否阻塞 false 连接不够直接报异常  true  一直阻塞 直至超时-->
+        <property name="blockWhenExhausted" value="false"/>
+    </bean>
+    <!--配置redis操作客户端-->
+    <bean id="jp" class="redis.clients.jedis.JedisPool">
+        <constructor-arg name="host" value="192.168.102.166"/>
+        <constructor-arg name="port" value="6379"/>
+        <constructor-arg name="poolConfig" ref="jedisPoolConfig"/>
+    </bean>
+
+
+</beans>
