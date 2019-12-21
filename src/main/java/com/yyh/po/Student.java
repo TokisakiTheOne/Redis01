@@ -13,6 +13,14 @@ public class Student {
                 '}';
     }
 
+    public Student(int stuId, String stuName) {
+        this.stuId = stuId;
+        this.stuName = stuName;
+    }
+
+    public Student() {
+    }
+
     private int stuId;
     private String stuName;
 

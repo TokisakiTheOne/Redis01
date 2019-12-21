@@ -53,9 +53,7 @@ public class Test {
 
     @org.junit.Test
     public void testServiceSet() {
-        Student stu=new Student();
-         stu.setStuId(3);
-         stu.setStuName("张三2");
+        Student stu=new Student(3,"a");
         rs.insertStudent(stu);
     }
     @org.junit.Test
@@ -70,9 +68,5 @@ public class Test {
     }
     @org.junit.Test
     public void testServiceUpdateStudent() {
-        Student stu = new Student();
-        stu.setStuId(3);
-        stu.setStuName("李四");
-        rs.updateStudent(stu);
     }
 }
